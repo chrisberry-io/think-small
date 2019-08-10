@@ -1,0 +1,25 @@
+.post{
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.wrapper{
+    background-color: #fff;
+    border-radius: 0.9375rem;
+    max-width: 635px;
+}
+
+.date{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+}
+.day{
+    background-color: #fff;
+    width: 2.1875rem;
+    height: 2.1875rem;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

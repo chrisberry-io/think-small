@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: `Kyle Mathews`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    title: `THINKsmall`,
+    author: `Chris Berry`,
+    description: `A continuous study in thinking small in Web Design and Development`,
+    siteUrl: `https://www.thinksmall.io`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `chris_berry`,
     },
   },
   plugins: [
@@ -72,6 +72,13 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-sass",
+      options: {
+        useResolveUrlLoader: true,
+        postCssPlugins: [require('tailwindcss')('./tailwind.config.js')],
       },
     },
   ],

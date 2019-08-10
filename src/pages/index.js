@@ -2,9 +2,9 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
+import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
 
 class BlogIndex extends React.Component {
   render() {
@@ -19,23 +19,18 @@ class BlogIndex extends React.Component {
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </div>
+            <PostSnap
+              key={node.fields.slug}
+              slug={node.fields.slug}
+              title={title}
+              day={node.day.date}
+              month={node.month.date}
+              year={node.year.date}
+              description={node.frontmatter.description}
+              excerpt={node.excerpt}
+              color={node.frontmatter.color}
+              image={node.frontmatter.featuredimg}
+            />
           )
         })}
       </Layout>
@@ -46,26 +41,39 @@ class BlogIndex extends React.Component {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
+query {
+  site {
+    siteMetadata {
+      title
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
+  }
+  allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    edges {
+      node {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+          color
+          featuredimg {
+           publicURL
           }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
-          }
+        }
+        month: frontmatter{
+          date(formatString: "MMMM")
+        }
+        day: frontmatter{
+          date(formatString: "DD")
+        }
+        year: frontmatter{
+          date(formatString: "YYYY")
         }
       }
     }
   }
+}
 `
