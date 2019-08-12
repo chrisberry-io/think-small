@@ -11,8 +11,9 @@
 
 .date{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     grid-column-gap: 10px;
+    width: 5rem;
 }
 .day{
     background-color: #fff;

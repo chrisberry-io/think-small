@@ -55,7 +55,7 @@ query {
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMM DD, YYYY")
           title
           description
           color
@@ -64,7 +64,7 @@ query {
           }
         }
         month: frontmatter{
-          date(formatString: "MMMM")
+          date(formatString: "MMM")
         }
         day: frontmatter{
           date(formatString: "DD")

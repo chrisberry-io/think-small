@@ -69,9 +69,9 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: `gatsby-plugin-styled-components`,
       options: {
-        pathToConfigModule: `src/utils/typography`,
+        // Add any options here
       },
     },
     {
