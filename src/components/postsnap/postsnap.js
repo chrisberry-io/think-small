@@ -2,7 +2,11 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 import styles from "./postsnap.module.scss"
+import dots from "../../../content/assets/vectors/corner-dots.svg"
 const Snippet = styled.div`
+position: relative;
+background-color: #ffffff;
+border-radius: 0.9375rem;
   ${props => {
     if (props.color !== null && props.background !== null) {
       return `
@@ -13,6 +17,31 @@ const Snippet = styled.div`
       `
     }
   }}
+
+  &:after{
+    display: block;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0) 0%,rgba(255,255,255,.2) 100%);
+    border: 2px solid #ffffff;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: -1;
+border-radius: 0.9375rem;
+  }
+
+  &:before{
+    display: block;
+    content: url(${dots});
+    width: 95px;
+    height: 100px;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+}
+  }
 `
 const PostLink = styled(Link)`
   border: none;
@@ -31,7 +60,7 @@ class PostSnap extends React.Component {
     }
     console.log(background)
     return (
-      <article className={`${styles.post} m-2`}>
+      <article className={`${styles.post} mt-16`}>
         <div className={styles.date}>
           <div className={styles.day}>
             <span>{this.props.day}</span>
@@ -51,7 +80,6 @@ class PostSnap extends React.Component {
             <PostLink to={this.props.slug} className="no-underline">{this.props.title}</PostLink>
           </h3>
           <p
-            className="font-body"
             dangerouslySetInnerHTML={{
               __html: this.props.description || this.props.excerpt,
             }}

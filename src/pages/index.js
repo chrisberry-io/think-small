@@ -1,10 +1,17 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
+import styled from "styled-components"
 import Bio from "../components/bio"
 import Layout from "../components/layout/layout"
 import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
+const PostList = styled.div`
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  max-width: 800px;
+  padding: 0 40px 0 25px;
+`
 
 class BlogIndex extends React.Component {
   render() {
@@ -14,6 +21,7 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
+        <PostList>
         <SEO title="All posts" />
         <Bio />
         {posts.map(({ node }) => {
@@ -33,6 +41,7 @@ class BlogIndex extends React.Component {
             />
           )
         })}
+        </PostList>
       </Layout>
     )
   }
@@ -41,39 +50,39 @@ class BlogIndex extends React.Component {
 export default BlogIndex
 
 export const pageQuery = graphql`
-query {
-  site {
-    siteMetadata {
-      title
+  query {
+    site {
+      siteMetadata {
+        title
+      }
     }
-  }
-  allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-    edges {
-      node {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMM DD, YYYY")
-          title
-          description
-          color
-          featuredimg {
-           publicURL
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      edges {
+        node {
+          excerpt
+          fields {
+            slug
           }
-        }
-        month: frontmatter{
-          date(formatString: "MMM")
-        }
-        day: frontmatter{
-          date(formatString: "DD")
-        }
-        year: frontmatter{
-          date(formatString: "YYYY")
+          frontmatter {
+            date(formatString: "MMM DD, YYYY")
+            title
+            description
+            color
+            featuredimg {
+              publicURL
+            }
+          }
+          month: frontmatter {
+            date(formatString: "MMM")
+          }
+          day: frontmatter {
+            date(formatString: "DD")
+          }
+          year: frontmatter {
+            date(formatString: "YYYY")
+          }
         }
       }
     }
   }
-}
 `
