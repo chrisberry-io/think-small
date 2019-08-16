@@ -93,6 +93,7 @@ class BlogPostTemplate extends React.Component {
             <span>{author}</span>
             <ul>
               {tags.map((tag, index) => {
+                //TODO: check for tags
                 return <Tag key={index}>{tag}</Tag>
               })}
             </ul>

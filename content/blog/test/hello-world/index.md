@@ -4,6 +4,7 @@ date: "2015-05-01T22:12:03.284Z"
 description: "Hello World"
 color: "#FF7A00"
 featuredimg: "./salty_egg.jpg"
+tags: ["tag1", "tag2", "tag3"]
 ---
 
 This is my first post on my new fake blog! How exciting!

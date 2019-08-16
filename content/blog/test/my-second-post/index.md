@@ -3,6 +3,7 @@ title: My Second Post!
 date: "2015-05-06T23:46:37.121Z"
 color: "#0BB1D1"
 featuredimg: "./christian-mackie-az2pTpXsDg0-unsplash.jpg"
+tags: ["tag1", "tag2", "tag3"]
 ---
 
 Wow! I love blogging so much already.
