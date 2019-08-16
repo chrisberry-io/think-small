@@ -1,8 +1,11 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
-import styles from "./postsnap.module.scss"
 import dots from "../../../content/assets/vectors/corner-dots.svg"
+const Post = styled.article`
+  display: grid;
+  grid-template-columns: auto 1fr;
+`
 const Snippet = styled.div`
 position: relative;
 background-color: #ffffff;
@@ -14,6 +17,7 @@ border-radius: 0.9375rem;
       color: #fff;
       background-blend-mode: multiply, normal, normal;
       background-size: auto, auto, cover;
+      background-position: center;
       `
     }
   }}
@@ -46,10 +50,24 @@ border-radius: 0.9375rem;
 const PostLink = styled(Link)`
   border: none;
 `
-const MonthYear= styled.div`
-  color: rgba( 255, 255, 255, .5);
+const Date = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 10px;
+  width: 5rem;
 `
-
+const MonthYear = styled.div`
+  color: rgba(255, 255, 255, 0.5);
+`
+const Day = styled.div`
+  background-color: #fff;
+  width: 2.1875rem;
+  height: 2.1875rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 class PostSnap extends React.Component {
   render() {
     let background
@@ -60,24 +78,26 @@ class PostSnap extends React.Component {
     }
     console.log(background)
     return (
-      <article className={`${styles.post} mt-16`}>
-        <div className={styles.date}>
-          <div className={styles.day}>
+      <Post className="mt-16">
+        <Date>
+          <Day>
             <span>{this.props.day}</span>
-          </div>
-          <MonthYear className={styles.monthyear}>
+          </Day>
+          <MonthYear>
             {this.props.month}
             <br />
             {this.props.year}
           </MonthYear>
-        </div>
+        </Date>
         <Snippet
           color={this.props.color}
           featuredImage={background}
-          className={`${styles.wrapper} p-12 rounded-lg bg-cover ml-4`}
+          className="p-12 rounded-lg bg-cover ml-4"
         >
-          <h3 className="text-3xl font-display font-bold mb-2">
-            <PostLink to={this.props.slug} className="no-underline">{this.props.title}</PostLink>
+          <h3 className="text-5xl font-display font-bold mb-2">
+            <PostLink to={this.props.slug} className="no-underline">
+              {this.props.title}
+            </PostLink>
           </h3>
           <p
             dangerouslySetInnerHTML={{
@@ -85,7 +105,7 @@ class PostSnap extends React.Component {
             }}
           />
         </Snippet>
-      </article>
+      </Post>
     )
   }
 }
