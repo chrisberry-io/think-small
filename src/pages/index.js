@@ -5,6 +5,14 @@ import Bio from "../components/bio"
 import Layout from "../components/layout/layout"
 import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
+import logo from "../../content/assets/vectors/logo-white.svg"
+const HeaderLogo = styled(Link)`
+  display: block;
+  background: url(${logo});
+  width: 130px;
+  height: 74px;
+  text-indent: -9999px;
+`
 const PostList = styled.div`
   display: block;
   margin: 0 auto;
@@ -21,6 +29,11 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
+        <header>
+          <h1 className="fixed p-10 pt-0">
+            <HeaderLogo to={`/`}>{siteTitle}</HeaderLogo>
+          </h1>
+        </header>
         <PostList>
         <SEO title="All posts" />
         <Bio />
