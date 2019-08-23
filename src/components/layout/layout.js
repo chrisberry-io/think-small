@@ -10,12 +10,15 @@ const Wrapper = styled.div`
 `
 const Content = styled.div`
   background: #100e17;
-  p {
+  position: relative;
+  z-index: 0;
+  p, ul {
     line-height: 1.5;
-    margin-bottom: 20px;
+    margin: 10px 0;
   }
   li {
     list-style-type: initial;
+    line-height: 1.5;
   }
 `
 

@@ -32,8 +32,8 @@ border-radius: 0.9375rem;
     position: absolute;
     top: 15px;
     left: 15px;
-    z-index: -1;
 border-radius: 0.9375rem;
+    z-index: -1;
   }
 
   &:before{
@@ -44,6 +44,7 @@ border-radius: 0.9375rem;
     position: absolute;
     right: -10px;
     top: -10px;
+    z-index: 10;
 }
   }
 `

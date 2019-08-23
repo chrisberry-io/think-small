@@ -78,6 +78,12 @@ const Sidebar = styled.aside`
   @media only screen and (max-width: 675px) {
     .date{
       float: left;
+      margin-right: 20px;
+    }
+    .day{
+      margin-left: -40px;
+      height: 80px;
+      width: 80px;
     }
   }
 `
@@ -86,7 +92,8 @@ const Content = styled.article`
   max-width: 900px;
   border-left: 1px solid #e5e5e5;
   padding-top: 80px;
-
+  padding-bottom: 100px;
+  
   h1:after {
     display: block;
     content: "";
@@ -97,10 +104,30 @@ const Content = styled.article`
     left: -40px;
     bottom: -20px;
   }
-  h1 {
-    font-size: 60px;
+  h1, h2, h3, h4, h5, h6{
     font-family: "Hind", san-serif;
     font-weight: bold;
+  }
+  h1 {
+    font-size: 60px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5, h6 {
+    font-size: 16px;
+  }
+  @media only screen and (max-width: 675px) {
+    padding-top: 40px;
+    h1{
+      margin: 0 0 30px;
+    }
   }
 `
 const Wrapper = styled.div`
@@ -112,11 +139,39 @@ const Wrapper = styled.div`
 `
 const Tag = styled.li`
   display: inline-block;
-  border 1px solid #e5e5e5;
+  border: 1px solid #e5e5e5;
   padding: 10px;
   list-style-type: none;
-  margin: 0 5px 5px 0;
+  margin: 3px;
 `
+const PostNav = styled(Link)`
+  background: #0cb2c0;
+  display: block;
+  margin-top: 40px;
+  padding: 20px;
+  position: relative;
+  font-weight: bold;
+  top: 0;
+  transition: top .25s;
+  &::after{
+    display: block;
+    position: absolute;
+    content: '';
+    border: 4px solid #100E17;
+    height: 100%;
+    width: 100%;
+    top: 8px;
+    left: 8px;
+    transition: top .25s, left .25s;
+  }
+  &:hover{
+    top: 15px;
+    &::after{
+      left: -8px;
+      top: -8px;
+    }
+  }
+` 
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -164,22 +219,20 @@ class BlogPostTemplate extends React.Component {
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
             <Bio />
 
-            <ul>
-              <li>
+                
                 {previous && (
-                  <Link to={previous.fields.slug} rel="prev">
+                  <PostNav to={previous.fields.slug} rel="prev" className="float-left font-display">
                     ← {previous.frontmatter.title}
-                  </Link>
+                  </PostNav>
                 )}
-              </li>
-              <li>
+              
                 {next && (
-                  <Link to={next.fields.slug} rel="next">
+                  <PostNav to={next.fields.slug} rel="next" className="float-right font-display">
                     {next.frontmatter.title} →
-                  </Link>
+                  </PostNav>
                 )}
-              </li>
-            </ul>
+              
+            
           </Content>
         </Wrapper>
       </Layout>

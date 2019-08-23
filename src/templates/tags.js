@@ -1,11 +1,12 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
-import Bio from "../components/bio"
 import Layout from "../components/layout/layout"
 import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
 import logo from "../../content/assets/vectors/logo-white.svg"
+import TagSelect from "../components/tag-select"
 const HeaderLogo = styled(Link)`
   display: block;
   background: url(${logo});
@@ -20,13 +21,23 @@ const PostList = styled.div`
   max-width: 800px;
   padding: 0 40px 0 25px;
 `
+const SelectTag = styled(TagSelect)`
+  height: 54px;
+  max-width: 325px;
+  width: 100%;
+  background: none;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 15px;
+`
 
-class BlogIndex extends React.Component {
+class Tags extends React.Component {
   render() {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
-    console.log(data)
+    const tag = this.props.pageContext.tag
+    console.log(this.props)
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <header>
@@ -35,8 +46,9 @@ class BlogIndex extends React.Component {
           </h1>
         </header>
         <PostList>
+        <h2>Posts tagged with {tag}</h2>
+        <SelectTag currentTag={tag}/>
         <SEO title="All posts" />
-        <Bio />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -60,16 +72,40 @@ class BlogIndex extends React.Component {
   }
 }
 
-export default BlogIndex
+Tags.propTypes = {
+  tag: PropTypes.string.isRequired,
+  allMarkdownRemark: PropTypes.shape({
+      totalCount: PropTypes.number.isRequired,
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          node: PropTypes.shape({
+            frontmatter: PropTypes.shape({
+              title: PropTypes.string.isRequired,
+            }),
+            fields: PropTypes.shape({
+              slug: PropTypes.string.isRequired,
+            }),
+          }),
+        }).isRequired
+      ),
+    }),
+}
+
+export default Tags
 
 export const pageQuery = graphql`
-  query {
+  query($tag: String) {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      limit: 2000
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
+      totalCount
       edges {
         node {
           excerpt
