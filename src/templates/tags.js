@@ -6,12 +6,13 @@ import Layout from "../components/layout/layout"
 import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
 import logo from "../../content/assets/vectors/logo-white.svg"
+import down from "../../content/assets/vectors/down.svg"
 import TagSelect from "../components/tag-select"
 const HeaderLogo = styled(Link)`
   display: block;
   background: url(${logo});
-  width: 130px;
-  height: 74px;
+  width: 181px;
+  height: 79px;
   text-indent: -9999px;
 `
 const PostList = styled.div`
@@ -29,17 +30,27 @@ const SelectTag = styled(TagSelect)`
   color: #fff;
   border: 2px solid #fff;
   border-radius: 15px;
+  text-align-last: center;
+  appearance: none;
+  font-weight: bold;
+  background: url(${down});
+  background-repeat: no-repeat;
+  background-position: right 1em top 50%,0 0;
+  margin: 0 auto;
+  display: block;
+  option{
+    color: #333;
+  }
 `
 
-class Tags extends React.Component {
-  render() {
-    const { data } = this.props
+const Tags = props => {
+    const { data } = props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
-    const tag = this.props.pageContext.tag
-    console.log(this.props)
+    const { tag } = props.pageContext
+    console.log(props)
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={props.location} title={siteTitle}>
         <header>
           <h1 className="fixed p-10 pt-0">
             <HeaderLogo to={`/`}>{siteTitle}</HeaderLogo>
@@ -47,7 +58,7 @@ class Tags extends React.Component {
         </header>
         <PostList>
         <h2>Posts tagged with {tag}</h2>
-        <SelectTag currentTag={tag}/>
+        <SelectTag current={tag} className="font-display"/>
         <SEO title="All posts" />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
@@ -70,10 +81,11 @@ class Tags extends React.Component {
       </Layout>
     )
   }
-}
 
 Tags.propTypes = {
-  tag: PropTypes.string.isRequired,
+  pageContext: PropTypes.shape({
+    tag: PropTypes.string.isRequired,
+  }),
   allMarkdownRemark: PropTypes.shape({
       totalCount: PropTypes.number.isRequired,
       edges: PropTypes.arrayOf(

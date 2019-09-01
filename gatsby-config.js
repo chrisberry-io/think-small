@@ -76,6 +76,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `thinksmall`
+      }
+    },
+    {
       resolve: "gatsby-plugin-sass",
       options: {
         useResolveUrlLoader: true,

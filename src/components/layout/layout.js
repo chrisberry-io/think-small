@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { Helmet } from "react-helmet"
 import "./layout.scss"
 import styled from "styled-components"
+import gatsbylogo from "../../../content/assets/vectors/Gatsby-Monogram.svg"
 
 const Wrapper = styled.div`
   background: linear-gradient(to bottom, #00bcd4 0%, #9c27b0 100%);
@@ -20,11 +21,22 @@ const Content = styled.div`
     list-style-type: initial;
     line-height: 1.5;
   }
+  footer{
+    color: #827AA0;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+      width: auto;
+      height: 16px;
+      display: inline-block;
+    }
+  }
 `
 
-class Layout extends React.Component {
-  render() {
-    const { children } = this.props
+const Layout = (props) =>{
+    const { children } = props
     return (
       <Wrapper className="font-body">
         <Content>
@@ -37,14 +49,11 @@ class Layout extends React.Component {
           </Helmet>
           <main>{children}</main>
           <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
+            © {new Date().getFullYear()} Chris Berry, Made with 🍺, 🦄, and&nbsp;<a href="https://www.gatsbyjs.org"><img src={gatsbylogo} alt="Gatsby" /></a>
           </footer>
         </Content>
       </Wrapper>
     )
   }
-}
 
 export default Layout

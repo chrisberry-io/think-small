@@ -6,10 +6,15 @@ const Post = styled.article`
   display: grid;
   grid-template-columns: auto 1fr;
 `
-const Snippet = styled.div`
+const Snippet = styled(Link)`
 position: relative;
 background-color: #ffffff;
 border-radius: 0.9375rem;
+top: 0;
+left: 0;
+transition: top .35s, left .35s;
+transition-delay: .15s;
+transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   ${props => {
     if (props.color !== null && props.background !== null) {
       return `
@@ -32,8 +37,11 @@ border-radius: 0.9375rem;
     position: absolute;
     top: 15px;
     left: 15px;
-border-radius: 0.9375rem;
+    border-radius: 0.9375rem;
     z-index: -1;
+    transition: top .35s, left .35s;
+    transition-delay: .15s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   &:before{
@@ -45,70 +53,81 @@ border-radius: 0.9375rem;
     right: -10px;
     top: -10px;
     z-index: 10;
+    transition: top .35s, transform .35s;
+    transition-delay: .15s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+&:hover{
+    top: 15px;
+    left: 15px;
+    &:after{
+      top: -15px;
+      left: -15px;
+    }
+    &:before {
+      transform: scale(1.2);
+      top:-15px;
+    }
   }
-`
-const PostLink = styled(Link)`
-  border: none;
+  }
 `
 const Date = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: 10px;
-  width: 5rem;
+  width: 7rem;
 `
 const MonthYear = styled.div`
   color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+  padding-top: 6px;
 `
 const Day = styled.div`
   background-color: #fff;
-  width: 2.1875rem;
-  height: 2.1875rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
 `
-class PostSnap extends React.Component {
-  render() {
-    let background
-    if (this.props.image !== null) {
-      background = `${this.props.image.publicURL}`
-    } else {
-      background = false
-    }
-    console.log(background)
-    return (
-      <Post className="mt-16">
-        <Date>
-          <Day>
-            <span>{this.props.day}</span>
-          </Day>
-          <MonthYear>
-            {this.props.month}
-            <br />
-            {this.props.year}
-          </MonthYear>
-        </Date>
-        <Snippet
-          color={this.props.color}
-          featuredImage={background}
-          className="p-12 rounded-lg bg-cover ml-4"
-        >
-          <h3 className="text-5xl font-display font-bold mb-2">
-            <PostLink to={this.props.slug} className="no-underline">
-              {this.props.title}
-            </PostLink>
-          </h3>
-          <p
-            dangerouslySetInnerHTML={{
-              __html: this.props.description || this.props.excerpt,
-            }}
-          />
-        </Snippet>
-      </Post>
-    )
+const PostSnap = props => {
+  let background
+  if (props.image !== null) {
+    background = `${props.image.publicURL}`
+  } else {
+    background = false
   }
+  console.log(background)
+  return (
+    <Post className="mt-16">
+      <Date>
+        <Day>
+          <span>{props.day}</span>
+        </Day>
+        <MonthYear>
+          {props.month}
+          <br />
+          {props.year}
+        </MonthYear>
+      </Date>
+      <Snippet
+        to={props.slug}
+        color={props.color}
+        featuredImage={background}
+        className="p-12 rounded-lg bg-cover ml-4"
+      >
+        <h3 className="text-5xl font-display font-bold mb-2">{props.title}</h3>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: props.description || props.excerpt,
+          }}
+        />
+      </Snippet>
+    </Post>
+  )
 }
 
 export default PostSnap

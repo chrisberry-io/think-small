@@ -6,34 +6,85 @@ import Layout from "../components/layout/layout"
 import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
 import logo from "../../content/assets/vectors/logo-white.svg"
+const Header = styled.header`
+    position: fixed;
+    top: 0;
+    background: #100E17;
+    width: 100%;
+    z-index: 15;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1{
+      padding: 0 50px;
+    }
+    nav{
+      position: relative;
+      right: 60px;
+      ul{
+        margin-top: 0;
+      }
+      li{
+        display: inline-block;  
+        font-size: 16px;
+        font-weight: bold;
+        a{
+          color: #827AA0;
+          padding: 10px 15px;
+          margin: 5px;
+          border-radius: 15px;
+          transition: color .25s, background .25s;
+          &:hover{
+            background: #ffffff;
+            color: #100E17;
+          }
+        }
+      }
+    }
+`
 const HeaderLogo = styled(Link)`
   display: block;
   background: url(${logo});
-  width: 130px;
-  height: 74px;
+  width: 182px;
+  height: 80px;
   text-indent: -9999px;
 `
 const PostList = styled.div`
   display: block;
   margin: 0 auto;
   position: relative;
-  max-width: 800px;
-  padding: 0 40px 0 25px;
+  max-width: 1050px;
+  padding: 90px 40px 0 25px;
 `
 
-class BlogIndex extends React.Component {
-  render() {
-    const { data } = this.props
+const BlogIndex = (props) => {
+    const { data } = props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
     console.log(data)
     return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <header>
-          <h1 className="fixed p-10 pt-0">
+      <Layout location={props.location} title={siteTitle}>
+        <Header>
+          <h1 className="p-10 pt-0">
             <HeaderLogo to={`/`}>{siteTitle}</HeaderLogo>
           </h1>
-        </header>
+          <nav className="font-display">
+            <ul>
+              <li>
+                <Link to="/">Posts</Link>
+              </li>
+              <li>
+                <Link to="/bookmarks">Bookmarks</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+            </ul>
+          </nav>
+        </Header>
         <PostList>
         <SEO title="All posts" />
         <Bio />
@@ -57,7 +108,6 @@ class BlogIndex extends React.Component {
         </PostList>
       </Layout>
     )
-  }
 }
 
 export default BlogIndex
