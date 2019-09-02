@@ -7,6 +7,7 @@ const Post = styled.article`
   grid-template-columns: auto 1fr;
 `
 const Snippet = styled(Link)`
+will-change: opacity;
 position: relative;
 background-color: #ffffff;
 border-radius: 0.9375rem;
@@ -70,18 +71,32 @@ transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
       top:-15px;
     }
   }
-  }
 `
 const Date = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: 10px;
   width: 7rem;
+  @media screen and (max-width: 710px){
+    display: flex;
+    position: absolute;
+    z-index:10;
+    width: auto;
+  }
 `
 const MonthYear = styled.div`
   color: rgba(255, 255, 255, 0.5);
   font-size: 18px;
   padding-top: 6px;
+  @media screen and (max-width: 710px){
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    br{
+      display: none;
+    }
+  }
 `
 const Day = styled.div`
   background-color: #fff;
@@ -92,6 +107,10 @@ const Day = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 18px;
+  @media screen and (max-width: 710px){
+    position: relative;
+    left: -10px;
+  }
 `
 const PostSnap = props => {
   let background
@@ -108,7 +127,7 @@ const PostSnap = props => {
           <span>{props.day}</span>
         </Day>
         <MonthYear>
-          {props.month}
+          {props.month}{' '}
           <br />
           {props.year}
         </MonthYear>

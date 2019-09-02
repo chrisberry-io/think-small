@@ -6,6 +6,7 @@ import Layout from "../components/layout/layout"
 import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
 import logo from "../../content/assets/vectors/logo-white.svg"
+import MainNav from "../components/main-nav"
 const Header = styled.header`
     position: fixed;
     top: 0;
@@ -68,22 +69,7 @@ const BlogIndex = (props) => {
           <h1 className="p-10 pt-0">
             <HeaderLogo to={`/`}>{siteTitle}</HeaderLogo>
           </h1>
-          <nav className="font-display">
-            <ul>
-              <li>
-                <Link to="/">Posts</Link>
-              </li>
-              <li>
-                <Link to="/bookmarks">Bookmarks</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/contact">Contact</Link>
-              </li>
-            </ul>
-          </nav>
+          <MainNav />
         </Header>
         <PostList>
         <SEO title="All posts" />

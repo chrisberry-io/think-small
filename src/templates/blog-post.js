@@ -10,6 +10,7 @@ import { Disqus, CommentCount } from "gatsby-plugin-disqus"
 // Utilities
 import kebabCase from "lodash/kebabCase"
 import { saturate } from "polished"
+import MainNav from "../components/main-nav"
 const HeaderLogo = styled(Link)`
   display: block;
   background: url(${logo});
@@ -247,6 +248,7 @@ const BlogPostTemplate = props => {
           )}
         </Sidebar>
         <Content className="pl-10 pr-16">
+          <MainNav />
           <h1>{post.frontmatter.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <Bio />
