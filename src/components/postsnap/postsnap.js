@@ -8,7 +8,7 @@ const Post = styled.article`
 `
 const Snippet = styled(Link)`
 position: relative;
-transform: translate3d(0,0,0);
+will-change: opacity;
 z-index: 100;
 background-color: #ffffff;
 border-radius: 0.9375rem;
