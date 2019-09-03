@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   padding-left: 10px;
 `
 const Content = styled.div`
-  background: #100e17;
+  background: linear-gradient(180deg, rgba(16, 14, 23, 0.87) 0%, #100E17 92.76%), linear-gradient(116.32deg, #CC00FF 0%, #00F0FF 85.06%);
   position: relative;
   z-index: 0;
   p, ul {

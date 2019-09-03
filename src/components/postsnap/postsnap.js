@@ -33,7 +33,6 @@ transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(255,255,255,0) 0%,rgba(255,255,255,.2) 100%);
-    border: 2px solid #ffffff;
     position: absolute;
     top: 15px;
     left: 15px;
