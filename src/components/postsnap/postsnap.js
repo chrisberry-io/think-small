@@ -5,17 +5,13 @@ import dots from "../../../content/assets/vectors/corner-dots.svg"
 const Post = styled.article`
   display: grid;
   grid-template-columns: auto 1fr;
+  position: relative;
+  z-index: 1;
 `
 const Snippet = styled(Link)`
-will-change: opacity;
 position: relative;
 background-color: #ffffff;
 border-radius: 0.9375rem;
-top: 0;
-left: 0;
-transition: top .35s, left .35s;
-transition-delay: .15s;
-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   ${props => {
     if (props.color !== null && props.background !== null) {
       return `
@@ -60,8 +56,6 @@ transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 &:hover{
-    top: 15px;
-    left: 15px;
     &:after{
       top: -15px;
       left: -15px;
