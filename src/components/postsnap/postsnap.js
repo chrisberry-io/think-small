@@ -15,10 +15,10 @@ border-radius: 0.9375rem;
   ${props => {
     if (props.color !== null && props.background !== null) {
       return `
-      background: linear-gradient(135deg, ${props.color} 0%,${props.color} 100%), linear-gradient(135deg, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%), url(${props.featuredImage});
+      background: linear-gradient(135deg, ${props.color} 0%,${props.color} 100%), url(${props.featuredImage});
       color: #fff;
-      background-blend-mode: multiply, normal, normal;
-      background-size: auto, auto, cover;
+      background-blend-mode: multiply, normal;
+      background-size: auto, cover;
       background-position: center;
       `
     }
