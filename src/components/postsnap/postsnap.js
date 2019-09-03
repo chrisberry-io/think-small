@@ -8,8 +8,6 @@ const Post = styled.article`
 `
 const Snippet = styled(Link)`
 position: relative;
-will-change: opacity;
-z-index: 100;
 background-color: #ffffff;
 border-radius: 0.9375rem;
 top: 0;
@@ -20,7 +18,7 @@ transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   ${props => {
     if (props.color !== null && props.background !== null) {
       return `
-      background: linear-gradient(135deg, ${props.color} 0%,${props.color} 100%), linear-gradient(135deg, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%), url(${props.featuredImage});
+      background: linear-gradient(135deg, ${props.color}80 0%,${props.color}FF 100%), linear-gradient(135deg, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%), url(${props.featuredImage});
       color: #fff;
       background-blend-mode: multiply, normal, normal;
       background-size: auto, auto, cover;
