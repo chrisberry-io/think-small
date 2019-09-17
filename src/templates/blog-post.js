@@ -10,7 +10,7 @@ import { Disqus, CommentCount } from "gatsby-plugin-disqus"
 // Utilities
 import kebabCase from "lodash/kebabCase"
 import { saturate } from "polished"
-import MainNav from "../components/main-nav"
+import MainNav from "../components/main-nav/main-nav"
 const HeaderLogo = styled(Link)`
   display: block;
   background: url(${logo});

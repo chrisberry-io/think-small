@@ -6,11 +6,10 @@ import Layout from "../components/layout/layout"
 import PostSnap from "../components/postsnap/postsnap"
 import SEO from "../components/seo"
 import logo from "../../content/assets/vectors/logo-white.svg"
-import MainNav from "../components/main-nav"
+import MainNav from "../components/main-nav/main-nav"
 const Header = styled.header`
     position: fixed;
     top: 0;
-    background: #100E17;
     width: 100%;
     z-index: 15;
     display: flex;
@@ -18,28 +17,8 @@ const Header = styled.header`
     align-items: center;
     h1{
       padding: 0 50px;
-    }
-    nav{
-      position: relative;
-      right: 60px;
-      ul{
-        margin-top: 0;
-      }
-      li{
-        display: inline-block;  
-        font-size: 16px;
-        font-weight: bold;
-        a{
-          color: #827AA0;
-          padding: 10px 15px;
-          margin: 5px;
-          border-radius: 15px;
-          transition: color .25s, background .25s;
-          &:hover{
-            background: #ffffff;
-            color: #100E17;
-          }
-        }
+      @media screen and (max-width: 675px) {
+        margin: 15px auto;
       }
     }
 `
@@ -49,6 +28,12 @@ const HeaderLogo = styled(Link)`
   width: 182px;
   height: 80px;
   text-indent: -9999px;
+    @media screen and (max-width: 675px) {
+      padding: 0 15px;
+      width: 136px;
+      height: 58px;
+      background-size: cover;
+    }
 `
 const PostList = styled.div`
   display: block;
@@ -58,11 +43,12 @@ const PostList = styled.div`
   padding: 90px 40px 0 25px;
 `
 
-const BlogIndex = (props) => {
+const BlogIndex = (props, {open, setOpen}) => {
     const { data } = props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
-    console.log(data)
+    console.log(open)
+    console.log(props.open)
     return (
       <Layout location={props.location} title={siteTitle}>
         <Header>
@@ -73,7 +59,6 @@ const BlogIndex = (props) => {
         </Header>
         <PostList>
         <SEO title="All posts" />
-        <Bio />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
